@@ -6,7 +6,7 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +33,6 @@ function getSteps() {
 
 function getStepContent(step) {
   switch (step) {
-    case 0:
-      return 'Step 1: Select campaign settings...';
     case 1:
       return 'Step 2: What is an ad group anyways?';
     case 2:
@@ -45,14 +43,17 @@ function getStepContent(step) {
       return 'Step 2: What is an ad group anyways?';
     case 5:
       return 'Step 3: This is the bit I really care about!';
+    case 6:
+      return 'Step 3: This is the bit I really care about!';
     default:
       return 'Unknown step';
   }
 }
 
-export default function HorizontalNonLinearAlternativeLabelStepper() {
+export default function HorizontalNonLinearAlternativeLabelStepper({ match }) {
+  const pageNumber = parseInt(match.params.id);
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(pageNumber);
   const [completed, setCompleted] = React.useState(new Set());
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -123,7 +124,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
 
   return (
     <div className={classes.root}>
-      <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+      <Stepper alternativeLabel nonLinear activeStep={activeStep - 1}>
         {steps.map((label, index) => {
           const stepProps = {};
           const buttonProps = {};
@@ -147,18 +148,13 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
       </Stepper>
       <div>
         <div>
-          <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+          <Typography className={classes.instructions}>{getStepContent(activeStep + 1)}</Typography>
           <div>
-            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-              previous
+            <Button disabled={activeStep === 1} onClick={handleBack} className={classes.button}>
+              <Link to={`/stepper/${activeStep - 1}`}>Previous </Link>
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleNext}
-              className={classes.button}
-            >
-              Next
+            <Button onClick={handleNext} className={classes.button} disabled={activeStep === 6}>
+              <Link to={`/stepper/${activeStep + 1}`}> Next </Link>
             </Button>
 
             <Button

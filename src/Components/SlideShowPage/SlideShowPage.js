@@ -1,31 +1,49 @@
+/* eslint-disable radix */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './SlideShowPage.css';
 import { makeStyles } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-// import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
+import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
-    flexGrow: 1,
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   },
-});
+}));
 
-function SlideShowPage() {
-  const [page, setPage] = React.useState('Journey from college');
-  const nextStep = () => {
-    setPage('Next pahge come');
-  };
-  const previousStep = () => {
-    setPage('Journey from college');
-  };
+const getStepContent = (step) => {
+  switch (step) {
+    case 1:
+      return (
+        <div>
+          <h1>Year 2013 to 2014</h1>
+          <p>I have finish my College life its to enjoyable. start my profestional life </p>
+        </div>
+      );
+    case 2:
+      return 'Step 3: This is the bit I really care about!';
+    case 3:
+      return 'Step 1: Select campaign settings...';
+    case 4:
+      return 'Step 2: What is an ad group anyways?';
+    case 5:
+      return 'Step 3: This is the bit I really care about!';
+    case 6:
+      return 'Step 3: This is the bit I really care about!';
+    default:
+      return 'Unknown step';
+  }
+};
 
+function SlideShowPage({ match }) {
+  // console.log(props);
   const classes = useStyles();
-  // const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-
+  const pageNumber = parseInt(match.params.id);
+  const [activeStep, setActiveStep] = React.useState(pageNumber);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -34,44 +52,30 @@ function SlideShowPage() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   return (
-    <div>
-      <div className="page">{page}</div>
+    <div className="slides">
       <div>
-        <Link to={`/slides/${0}`}>
-          <Button variant="contained" onClick={previousStep}>
-            {' '}
+        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+      </div>
+      <div className="button">
+        <Link to={`/slides/${activeStep - 1}`}>
+          <Button variant="contained" size="small" onClick={handleBack} disabled={activeStep === 1}>
             Previous
           </Button>
         </Link>
-        <Link to={`/slides/${1}`}>
-          <Button variant="contained" color="primary" onClick={nextStep}>
+        <Link to={`/slides/${activeStep + 1}`}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === 6}
+          >
             Next
           </Button>
         </Link>
-        <Link to="/stepper"> Steeper</Link>
       </div>
-
-      <MobileStepper
-        variant="dots"
-        steps={6}
-        position="static"
-        activeStep={activeStep}
-        className={classes.root}
-        nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-            Next
-            {/* {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />} */}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {/* {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />} */}
-            Back
-          </Button>
-        }
-      />
     </div>
   );
 }
 
-export default SlideShowPage;
+export default withRouter(SlideShowPage);

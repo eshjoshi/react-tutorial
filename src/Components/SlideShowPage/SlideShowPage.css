@@ -1,5 +1,12 @@
-.page{
-width: 100%;
-padding-top: 10%;
-padding-bottom: 5%;
+.slides{
+    border: 1px solid #d6d2d2;
+    margin: 10px;
+    box-shadow: 2px 2px 1px #d6d2d2;
+    min-height: 500px;
+    height: auto;
+}
+.button{
+    position: absolute;
+    bottom: 30%;
+    margin:10px;
 }

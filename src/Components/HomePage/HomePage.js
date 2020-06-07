@@ -44,7 +44,7 @@ function HomePage() {
           </CardActionArea>
           <CardActions>
             <Button size="small" color="primary">
-              <Link to={`/slides/${0}`}>Show</Link>
+              <Link to={`/slides/${1}`}>Show</Link>
             </Button>
           </CardActions>
         </Card>
@@ -68,7 +68,7 @@ function HomePage() {
           </CardActionArea>
           <CardActions>
             <Button size="small" color="primary">
-              Show
+              <Link to="/calculator">Show</Link>
             </Button>
           </CardActions>
         </Card>
