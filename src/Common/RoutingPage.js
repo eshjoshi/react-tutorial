@@ -5,6 +5,7 @@ import HomePage from '../Components/HomePage/HomePage';
 import SlideShowPage from '../Components/SlideShowPage/SlideShowPage';
 import StepperPage from '../Components/StepperPage/StepperPage';
 import CalculatorPage from '../Components/CalculatorPage/CalculatorPage';
+import PuzzaleGamePage from '../Components/PuzzaleGamePage/PuzzaleGamePage';
 
 function RoutingPage() {
   return (
@@ -15,6 +16,7 @@ function RoutingPage() {
         <Route exact path="/slides/:id" component={SlideShowPage} />
         <Route exact path="/stepper/:id" component={StepperPage} />
         <Route exact path="/calculator" component={CalculatorPage} />
+        <Route exact path="/puzzale" component={PuzzaleGamePage} />
       </div>
     </BrowserRouter>
   );

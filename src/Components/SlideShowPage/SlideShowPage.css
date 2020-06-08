@@ -4,9 +4,14 @@
     box-shadow: 2px 2px 1px #d6d2d2;
     min-height: 500px;
     height: auto;
+    padding: 2%;
+
 }
 .button{
     position: absolute;
     bottom: 30%;
     margin:10px;
+}
+.navBackground{
+    background: #e8e5e5;
 }

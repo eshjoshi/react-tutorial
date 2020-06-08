@@ -23,14 +23,13 @@ const useStyles = makeStyles({
 function HomePage() {
   const classes = useStyles();
   return (
-    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+    <Grid container direction="row" justify="center" alignItems="center">
       <Grid item xs={4}>
-        {/* <div className="homePage"> */}
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="/static/images/cards/contemplative-reptile.jpg"
+              image="https://spin.atomicobject.com/wp-content/uploads/20181229133335/journey-to-developer.jpg"
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -54,7 +53,7 @@ function HomePage() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="/static/images/cards/contemplative-reptile.jpg"
+              image="https://d13qmi8c46i38w.cloudfront.net/media/UCPthyssenkruppBAMXUK/assets.files/used-images/calculator_image_w2000_h670.jpg"
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -62,7 +61,8 @@ function HomePage() {
                 Calculater
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Included + -.
+                Included addition subtraction, division, multiplication, Equal and Clear
+                functionality.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -72,7 +72,30 @@ function HomePage() {
             </Button>
           </CardActions>
         </Card>
-        {/* </div> */}
+      </Grid>
+      <Grid item xs={4}>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="https://cdn.thewirecutter.com/wp-content/uploads/2020/03/puzzle-lowres-2x1--1024x512.jpg"
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Puzzale Game
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                you have to clickon tile to rotate it anti-clockwise by 90 degrees
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              <Link to="/puzzale">Show</Link>
+            </Button>
+          </CardActions>
+        </Card>
       </Grid>
     </Grid>
   );
