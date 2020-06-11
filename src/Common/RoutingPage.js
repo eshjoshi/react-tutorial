@@ -6,6 +6,9 @@ import SlideShowPage from '../Components/SlideShowPage/SlideShowPage';
 import StepperPage from '../Components/StepperPage/StepperPage';
 import CalculatorPage from '../Components/CalculatorPage/CalculatorPage';
 import PuzzaleGamePage from '../Components/PuzzaleGamePage/PuzzaleGamePage';
+import VirtualBankingPage from '../Components/VirtualBankingPage/VirtualBankingPage';
+import NewAccountPage from '../Components/VirtualBankingPage/NewAccountPage';
+import ManageAccountPage from '../Components/VirtualBankingPage/ManageAccountPage';
 
 function RoutingPage() {
   return (
@@ -17,6 +20,9 @@ function RoutingPage() {
         <Route exact path="/stepper/:id" component={StepperPage} />
         <Route exact path="/calculator" component={CalculatorPage} />
         <Route exact path="/puzzale" component={PuzzaleGamePage} />
+        <Route exact path="/banking" component={VirtualBankingPage} />
+        <Route exact path="/newAccount" component={NewAccountPage} />
+        <Route exact path="/manageAccount/:id" component={ManageAccountPage} />
       </div>
     </BrowserRouter>
   );

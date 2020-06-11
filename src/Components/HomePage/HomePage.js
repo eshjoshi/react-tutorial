@@ -12,20 +12,29 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
+  root: {},
   media: {
     height: 140,
+  },
+  spacing: {
+    padding: '2%',
   },
 });
 
 function HomePage() {
   const classes = useStyles();
   return (
-    <Grid container direction="row" justify="center" alignItems="center">
-      <Grid item xs={4}>
-        <Card className={classes.root}>
+    <Grid
+      container
+      direction="row"
+      className={classes.spacing}
+      justify="flex-start"
+      alignItems="flex-start"
+      item
+      xs={12}
+    >
+      <Grid item xs={4} className={classes.spacing}>
+        <Card>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -37,7 +46,7 @@ function HomePage() {
                 Journey from College
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Included some professional and enjoyable moment.
+                Included some professional life, updated skills and enjoyable moment.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -48,8 +57,8 @@ function HomePage() {
           </CardActions>
         </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Card className={classes.root}>
+      <Grid item xs={4} className={classes.spacing}>
+        <Card>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -73,8 +82,8 @@ function HomePage() {
           </CardActions>
         </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Card className={classes.root}>
+      <Grid item xs={4} className={classes.spacing}>
+        <Card>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -93,6 +102,30 @@ function HomePage() {
           <CardActions>
             <Button size="small" color="primary">
               <Link to="/puzzale">Show</Link>
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={4} className={classes.spacing}>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="https://cdn.i-scmp.com/sites/default/files/styles/1200x800/public/d8/images/methode/2020/01/14/90c5e516-368b-11ea-9933-e21be988cd59_image_hires_185803.jpg?itok=Y_bHQHKH&v=1578999489"
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Banking Website
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Api building in banking site and vertual ATM
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              <Link to="/banking">Show</Link>
             </Button>
           </CardActions>
         </Card>

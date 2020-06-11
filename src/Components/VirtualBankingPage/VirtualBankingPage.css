@@ -1,0 +1,15 @@
+.virtualBankingPage{
+    padding: 2%;
+}
+.vbTableBorder{
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.vbFormPage{
+    padding: 2%;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 3%;
+}
+.vbFormElement{
+    width: 30%;
+    display: flex !important;
+}
