@@ -2,7 +2,7 @@ import React from 'react';
 import './PuzzaleGamePage.css';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
+import GridListTile from '@material-ui/core/GridListTile';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 // import Image from 'material-ui-image';
@@ -59,57 +59,31 @@ function PuzzaleGamePage() {
     { id: 24, img: Straight1, title: 's0', deg: 0 },
     { id: 25, img: Cap1, title: 'c0', deg: 0 },
   ];
-  const [imageData, setRotateImage] = React.useState(tileData);
+  const [isScramble, setRotateImage] = React.useState(false);
 
   const onClickScramble = () => {
-    setRotateImage(tileData);
+    setRotateImage(!isScramble);
   };
-
-  const anticlock = (clickTile) => {
-    const editedtile = {
-      id: clickTile.id,
-      img: clickTile.img,
-      title: clickTile.title,
-      deg: clickTile.deg - 90,
-    };
-    const tileData1 = tileData.map((u) => (u.id !== editedtile.id ? u : editedtile));
-    setRotateImage(tileData1);
-  };
+  const degree = [90, 180, 270, 0];
+  const randomDegree = degree[Math.floor(Math.random() * degree.length)];
 
   return (
-    imageData && (
+    tileData && (
       <div>
         <GridList cellHeight={160} className={classes.root} cols={5}>
-          {imageData.map((tile) => (
-            // <GridListTile
-            //   key={tile.id}
-            //   cols={5}
-            //   style={{
-            //     width: 100,
-            //     height: 100,
-            //     padding: 0,
-            //   }}
-            // >
-            <ImagePage
+          {tileData.map((tile) => (
+            <GridListTile
+              key={tile.id}
+              cols={5}
               style={{
-                transform: `rotate(${tile.deg}deg)`,
-                position: 'static',
+                width: 100,
+                height: 100,
+                padding: 0,
+                transform: `rotate(${!isScramble ? tile.deg : randomDegree}deg)`,
               }}
-              src={tile.img}
-              alt={tile.id}
-              deg={tile.deg}
-              // onClick={() => anticlock(rotate)}
-            />
-            //   {/* <Image
-            //     style={{
-            //       transform: `rotate(${tile.deg}deg)`,
-            //       position: 'static',
-            //     }}
-            //     src={tile.img}
-            //     alt={tile.id}
-            //     onClick={() => anticlock(tile)}
-            //   /> */}
-            // {/* </GridListTile> */}
+            >
+              <ImagePage src={tile.img} alt={tile.id} deg={tile.deg} />
+            </GridListTile>
           ))}
         </GridList>
         <Button variant="contained" color="primary" onClick={() => onClickScramble()}>
