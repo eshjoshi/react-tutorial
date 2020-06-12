@@ -2,15 +2,17 @@ import React from 'react';
 import './PuzzaleGamePage.css';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+// import GridListTile from '@material-ui/core/GridListTile';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+// import Image from 'material-ui-image';
+// import Image from 'material-ui-image';
 import Elbow1 from '../../Assets/elbow1.png';
 import Tee1 from '../../Assets/tee1.png';
 import Source1 from '../../Assets/source1.png';
 import Straight1 from '../../Assets/straight1.png';
 import Cap1 from '../../Assets/cap1.png';
-import Image from './Image';
+import ImagePage from './Image';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +21,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
     width: 500,
     height: 500,
+  },
+  gridList: {
+    width: '100%',
+    height: '100%',
   },
 }));
 
@@ -55,40 +59,68 @@ function PuzzaleGamePage() {
     { id: 24, img: Straight1, title: 's0', deg: 0 },
     { id: 25, img: Cap1, title: 'c0', deg: 0 },
   ];
-  // const [imageData, setRotateImage] = useState(tileData);
+  const [imageData, setRotateImage] = React.useState(tileData);
 
-  // const onClickScramble = (tileData1) => {
-  //   setRotateImage(tileData1);
-  // };
+  const onClickScramble = () => {
+    setRotateImage(tileData);
+  };
+
+  const anticlock = (clickTile) => {
+    const editedtile = {
+      id: clickTile.id,
+      img: clickTile.img,
+      title: clickTile.title,
+      deg: clickTile.deg - 90,
+    };
+    const tileData1 = tileData.map((u) => (u.id !== editedtile.id ? u : editedtile));
+    setRotateImage(tileData1);
+  };
 
   return (
-    <div>
-      <div className={classes.root}>
-        <GridList className={classes.gridList} cols={5}>
-          {tileData.map((tile) => (
-            <GridListTile
-              key={tile.id}
+    imageData && (
+      <div>
+        <GridList cellHeight={160} className={classes.root} cols={5}>
+          {imageData.map((tile) => (
+            // <GridListTile
+            //   key={tile.id}
+            //   cols={5}
+            //   style={{
+            //     width: 100,
+            //     height: 100,
+            //     padding: 0,
+            //   }}
+            // >
+            <ImagePage
               style={{
-                width: 100,
-                height: 100,
-                padding: 0,
+                transform: `rotate(${tile.deg}deg)`,
+                position: 'static',
               }}
-            >
-              <Image src={tile.img} alt={tile.id} deg={tile.deg} />
-            </GridListTile>
+              src={tile.img}
+              alt={tile.id}
+              deg={tile.deg}
+              // onClick={() => anticlock(rotate)}
+            />
+            //   {/* <Image
+            //     style={{
+            //       transform: `rotate(${tile.deg}deg)`,
+            //       position: 'static',
+            //     }}
+            //     src={tile.img}
+            //     alt={tile.id}
+            //     onClick={() => anticlock(tile)}
+            //   /> */}
+            // {/* </GridListTile> */}
           ))}
         </GridList>
-      </div>
-      <div>
-        {' '}
-        {/* <Button variant="contained" color="primary" onClick={() => onClickScramble(tileData)}>
+        <Button variant="contained" color="primary" onClick={() => onClickScramble()}>
           Scramble
-        </Button> */}
+        </Button>
         <Button variant="contained" color="primary" size="small" component={Link} to="/home">
           Back
         </Button>
       </div>
-    </div>
+      // </div>
+    )
   );
 }
 

@@ -125,7 +125,7 @@ function HomePage() {
           </CardActionArea>
           <CardActions>
             <Button size="small" color="primary">
-              <Link to="/banking">Show</Link>
+              <Link to="/loginPage">Show</Link>
             </Button>
           </CardActions>
         </Card>

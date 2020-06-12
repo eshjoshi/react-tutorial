@@ -1,5 +1,5 @@
-// import React from 'react';
 import API from '../../utils/api';
+import AlertShow from './AlertShow';
 
 const getAccount = () => {
   return API.get('/accounts')
@@ -7,7 +7,7 @@ const getAccount = () => {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };
 const postAccount = (account) => {
@@ -28,5 +28,22 @@ const postManageAccount = (accountData, operation) => {
       throw error;
     });
 };
-
-export { getAccount, postAccount, postManageAccount };
+const postLogin = (loginData) => {
+  return API.post(`/login`, JSON.stringify(loginData))
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      alert(error);
+    });
+};
+const postRegister = (registerData) => {
+  return API.post(`/register`, JSON.stringify(registerData))
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      alert(error);
+    });
+};
+export { getAccount, postAccount, postManageAccount, postLogin, postRegister };
