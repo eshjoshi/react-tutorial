@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -17,21 +18,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewAccountPage() {
-  const [userId, setUserId] = React.useState('E');
+function NewAccountPage(props) {
   const [balance, setBalance] = React.useState(0);
-
+  const accountValue = props;
   const classes = useStyles();
-
-  const userIdChange = (event) => {
-    setUserId(event.target.value);
-  };
   const balanceChange = (event) => {
     setBalance(event.target.value);
   };
-  const addNewAccount = (newId, newBalance) => {
+  const addNewAccount = (newBalance) => {
     const account = {
-      userid: newId,
+      userid: accountValue.match.params.id,
       balance: Number(newBalance * 100),
     };
     postAccount(account);
@@ -45,7 +41,7 @@ function NewAccountPage() {
       <form className={classes.root} noValidate autoComplete="off">
         <FormControl className="vbFormElement">
           <InputLabel htmlFor="component-simple">User Id</InputLabel>
-          <Input id="component-simple" value={userId} onChange={userIdChange} />
+          <Input id="component-simple" value={accountValue.match.params.id} disabled />
         </FormControl>
         <FormControl className="vbFormElement">
           <InputLabel htmlFor="component-simple">Amount</InputLabel>
@@ -56,7 +52,7 @@ function NewAccountPage() {
           color="primary"
           component={Link}
           to="/banking"
-          onClick={() => addNewAccount(userId, balance)}
+          onClick={() => addNewAccount(balance)}
         >
           Save
         </Button>
@@ -67,5 +63,15 @@ function NewAccountPage() {
     </div>
   );
 }
+
+NewAccountPage.propTypes = {
+  accountValue: PropTypes.shape({
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      }),
+    }),
+  }).isRequired,
+};
 
 export default NewAccountPage;

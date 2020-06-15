@@ -111,7 +111,7 @@ export default function VirtualBankingPage() {
   const [accounts, setAccounts] = React.useState(null);
   React.useEffect(() => {
     getAccount().then((response) => {
-      setAccounts(response.accounts.reverse());
+      setAccounts(response.accounts);
     });
   }, []);
 

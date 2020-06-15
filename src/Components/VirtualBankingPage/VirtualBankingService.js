@@ -1,8 +1,24 @@
 import API from '../../utils/api';
-import AlertShow from './AlertShow';
 
 const getAccount = () => {
-  return API.get('/accounts')
+  return API.get('/accounts', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+const getUsers = () => {
+  return API.get('/users', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
     .then((response) => {
       return response.data;
     })
@@ -11,7 +27,7 @@ const getAccount = () => {
     });
 };
 const postAccount = (account) => {
-  return API.post('/accounts', JSON.stringify(account))
+  return API.post('/accounts', account)
     .then((response) => {
       return response.data;
     })
@@ -20,7 +36,7 @@ const postAccount = (account) => {
     });
 };
 const postManageAccount = (accountData, operation) => {
-  return API.post(`/accounts/${operation}`, JSON.stringify(accountData))
+  return API.post(`/accounts/${operation}`, accountData)
     .then((response) => {
       return response.data;
     })
@@ -29,7 +45,7 @@ const postManageAccount = (accountData, operation) => {
     });
 };
 const postLogin = (loginData) => {
-  return API.post(`/login`, JSON.stringify(loginData))
+  return API.post(`/login`, loginData)
     .then((response) => {
       return response.data;
     })
@@ -38,7 +54,7 @@ const postLogin = (loginData) => {
     });
 };
 const postRegister = (registerData) => {
-  return API.post(`/register`, JSON.stringify(registerData))
+  return API.post(`/users`, registerData)
     .then((response) => {
       return response.data;
     })
@@ -46,4 +62,4 @@ const postRegister = (registerData) => {
       alert(error);
     });
 };
-export { getAccount, postAccount, postManageAccount, postLogin, postRegister };
+export { getAccount, postAccount, postManageAccount, postLogin, postRegister, getUsers };

@@ -5,8 +5,6 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-// import Image from 'material-ui-image';
-// import Image from 'material-ui-image';
 import Elbow1 from '../../Assets/elbow1.png';
 import Tee1 from '../../Assets/tee1.png';
 import Source1 from '../../Assets/source1.png';
@@ -59,13 +57,12 @@ function PuzzaleGamePage() {
     { id: 24, img: Straight1, title: 's0', deg: 0 },
     { id: 25, img: Cap1, title: 'c0', deg: 0 },
   ];
-  const [isScramble, setRotateImage] = React.useState(false);
-
-  const onClickScramble = () => {
-    setRotateImage(!isScramble);
-  };
-  const degree = [90, 180, 270, 0];
+  const degree = [90, 180, 270, 0, 360];
   const randomDegree = degree[Math.floor(Math.random() * degree.length)];
+  const [scramble, setScramble] = React.useState(randomDegree - 90);
+  const onClickScramble = () => {
+    setScramble(randomDegree);
+  };
 
   return (
     tileData && (
@@ -79,10 +76,10 @@ function PuzzaleGamePage() {
                 width: 100,
                 height: 100,
                 padding: 0,
-                transform: `rotate(${!isScramble ? tile.deg : randomDegree}deg)`,
+                transform: `rotate(${scramble - tile.deg}deg)`,
               }}
             >
-              <ImagePage src={tile.img} alt={tile.id} deg={tile.deg} />
+              <ImagePage src={tile.img} alt={tile.tittle} deg={scramble - tile.deg} />
             </GridListTile>
           ))}
         </GridList>
@@ -93,7 +90,6 @@ function PuzzaleGamePage() {
           Back
         </Button>
       </div>
-      // </div>
     )
   );
 }

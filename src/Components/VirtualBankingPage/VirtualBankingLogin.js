@@ -4,7 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { postLogin } from './VirtualBankingService';
 import './VirtualBankingPage.css';
@@ -22,6 +22,7 @@ function VirtualBankingLogin() {
   const [password, setPassword] = React.useState();
 
   const classes = useStyles();
+  const history = useHistory();
 
   const userNameChange = (event) => {
     setUserName(event.target.value);
@@ -34,7 +35,12 @@ function VirtualBankingLogin() {
       username: loginUsername,
       password: loginPassword,
     };
-    postLogin(loginAccountData);
+    postLogin(loginAccountData).then((response) => {
+      if (response !== undefined) {
+        localStorage.setItem('token', response.token);
+        history.push('/users');
+      }
+    });
   };
 
   return (
@@ -42,7 +48,7 @@ function VirtualBankingLogin() {
       <Typography variant="h5" gutterBottom>
         Bank Login
       </Typography>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="on">
         <FormControl className="vbFormElement">
           <InputLabel htmlFor="component-simple">User Name</InputLabel>
           <Input id="component-simple" value={userName} onChange={userNameChange} />
@@ -55,7 +61,6 @@ function VirtualBankingLogin() {
           variant="outlined"
           color="primary"
           component={Link}
-          //   to="/banking"
           onClick={() => loginAccount(userName, password)}
         >
           Login

@@ -11,6 +11,7 @@ import NewAccountPage from '../Components/VirtualBankingPage/NewAccountPage';
 import ManageAccountPage from '../Components/VirtualBankingPage/ManageAccountPage';
 import VirtualBankingLogin from '../Components/VirtualBankingPage/VirtualBankingLogin';
 import VirtualBankingNewRegister from '../Components/VirtualBankingPage/VirtualBankingNewRegister';
+import UsersAccountPage from '../Components/VirtualBankingPage/UsersAccountPage';
 
 function RoutingPage() {
   return (
@@ -23,10 +24,11 @@ function RoutingPage() {
         <Route exact path="/calculator" component={CalculatorPage} />
         <Route exact path="/puzzale" component={PuzzaleGamePage} />
         <Route exact path="/banking" component={VirtualBankingPage} />
-        <Route exact path="/newAccount" component={NewAccountPage} />
+        <Route exact path="/newAccount/:id" component={NewAccountPage} />
         <Route exact path="/manageAccount/:id" component={ManageAccountPage} />
         <Route exact path="/loginPage" component={VirtualBankingLogin} />
         <Route exact path="/createNewAccount" component={VirtualBankingNewRegister} />
+        <Route exact path="/users" component={UsersAccountPage} />
       </div>
     </BrowserRouter>
   );
