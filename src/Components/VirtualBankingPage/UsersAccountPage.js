@@ -12,6 +12,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { getUsers } from './VirtualBankingService';
 import { EnhancedTableHead, stableSort, getComparator } from './TableShorting';
+import ButtonAppBar from './Appbar';
 
 const tableHeaderName = [
   {
@@ -125,64 +126,69 @@ export default function UsersAccountPage() {
 
   return (
     users && (
-      <div className="virtualBankingPage">
-        <Typography variant="h4" gutterBottom>
-          Users List
-        </Typography>
-        <Paper className={classes.paper}>
-          <TableContainer>
-            <Table
-              className={classes.table}
-              aria-labelledby="tableTitle"
-              aria-label="enhanced table"
-            >
-              <EnhancedTableHead
-                classes={classes}
-                headername={tableHeaderName}
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={users.length}
-              />
-              <TableBody>
-                {stableSort(users, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow key={row.userid}>
-                        <TableCell align="left">{row.id}</TableCell>
-                        <TableCell align="left">{row.fullname}</TableCell>
-                        <TableCell align="left">{row.username}</TableCell>
-                        <TableCell align="left">
-                          {moment(row.createdat).format('DD/MM/YYYY')}
-                        </TableCell>
-                        <TableCell align="left">{row.numaccounts}</TableCell>
-                        <TableCell align="left">
-                          <Link to={`/newAccount/${row.id}`}>Create Account</Link>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 20, 30]}
-            component="div"
-            count={users.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </Paper>
+      <div>
+        <ButtonAppBar />
+        <div className="virtualBankingPage">
+          <Typography variant="h4" gutterBottom>
+            Users List
+          </Typography>
+          <Paper className={classes.paper}>
+            <TableContainer>
+              <Table
+                className={classes.table}
+                aria-labelledby="tableTitle"
+                aria-label="enhanced table"
+              >
+                <EnhancedTableHead
+                  classes={classes}
+                  headername={tableHeaderName}
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={users.length}
+                />
+                <TableBody>
+                  {stableSort(users, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow key={row.userid}>
+                          <TableCell align="left">{row.id}</TableCell>
+                          <TableCell align="left">{row.fullname}</TableCell>
+                          <TableCell align="left">{row.username}</TableCell>
+                          <TableCell align="left">
+                            {moment(row.createdat).format('DD/MM/YYYY')}
+                          </TableCell>
+                          <TableCell align="left">{row.numaccounts}</TableCell>
+                          <TableCell align="left">
+                            <Link to={`/newAccount/${row.id}`}>Create Account</Link>
+                            <br />
+                            <Link to={`/userAccount/${row.id}`}>View Users Account</Link>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 20, 30]}
+              component="div"
+              count={users.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
       </div>
     )
   );

@@ -64,7 +64,7 @@ function VirtualBankingNewRegister() {
           variant="outlined"
           color="primary"
           component={Link}
-          //   to="/banking"
+          to="/loginPage"
           onClick={() => resisterAccount(fullName, userName, password)}
         >
           Register

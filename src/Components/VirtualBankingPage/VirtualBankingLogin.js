@@ -38,7 +38,12 @@ function VirtualBankingLogin() {
     postLogin(loginAccountData).then((response) => {
       if (response !== undefined) {
         localStorage.setItem('token', response.token);
-        history.push('/users');
+        localStorage.setItem('userId', response.id);
+        if (response.id === '1000001') {
+          history.push('/users');
+        } else {
+          history.push(`/userAccount/${response.id}`);
+        }
       }
     });
   };

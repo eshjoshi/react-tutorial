@@ -15,6 +15,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Typography from '@material-ui/core/Typography';
 import { postManageAccount } from './VirtualBankingService';
 import './VirtualBankingPage.css';
+import ButtonAppBar from './Appbar';
 
 function Alert(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -57,50 +58,53 @@ function ManageAccountPage(props) {
   };
 
   return (
-    <div className="vbFormPage">
-      <Typography variant="h5" gutterBottom>
-        Manage Account
-      </Typography>
-      <form className={classes.root} noValidate autoComplete="off">
-        <FormControl component="fieldset" className="vbFormRadio">
-          <FormLabel component="legend">Select Operation</FormLabel>
-          <RadioGroup
-            row
-            aria-label="operation"
-            name="operation"
-            value={operation}
-            onChange={oprationChange}
+    <div>
+      <ButtonAppBar />
+      <div className="vbFormPage">
+        <Typography variant="h5" gutterBottom>
+          Manage Account
+        </Typography>
+        <form className={classes.root} noValidate autoComplete="off">
+          <FormControl component="fieldset" className="vbFormRadio">
+            <FormLabel component="legend">Select Operation</FormLabel>
+            <RadioGroup
+              row
+              aria-label="operation"
+              name="operation"
+              value={operation}
+              onChange={oprationChange}
+            >
+              <FormControlLabel value="credit" control={<Radio />} label="Credit" />
+              <FormControlLabel value="debit" control={<Radio />} label="Debit" />
+            </RadioGroup>
+          </FormControl>
+          <FormControl className="vbFormElement">
+            <InputLabel htmlFor="component-simple">Account Id</InputLabel>
+            <Input id="component-simple" value={accountValue.match.params.aId} disabled />
+          </FormControl>
+          <FormControl className="vbFormElement">
+            <InputLabel htmlFor="component-simple">Amount</InputLabel>
+            <Input id="component-simple" type="number" value={amount} onChange={amountChange} />
+          </FormControl>
+          <Button
+            variant="outlined"
+            color="primary"
+            component={Link}
+            to={`/userAccount/${accountValue.match.params.uId}`}
+            onClick={() => manageAccounts(accountValue.match.params.aId, amount, operation)}
           >
-            <FormControlLabel value="credit" control={<Radio />} label="Credit" />
-            <FormControlLabel value="debit" control={<Radio />} label="Debit" />
-          </RadioGroup>
-        </FormControl>
-        <FormControl className="vbFormElement">
-          <InputLabel htmlFor="component-simple">Account Id</InputLabel>
-          <Input id="component-simple" value={accountValue.match.params.id} disabled />
-        </FormControl>
-        <FormControl className="vbFormElement">
-          <InputLabel htmlFor="component-simple">Amount</InputLabel>
-          <Input id="component-simple" type="number" value={amount} onChange={amountChange} />
-        </FormControl>
-        <Button
-          variant="outlined"
-          color="primary"
-          component={Link}
-          //   to="/banking"
-          onClick={() => manageAccounts(accountValue.match.params.id, amount, operation)}
-        >
-          Save
-        </Button>
-        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            you have sucessfully done
-          </Alert>
-        </Snackbar>
-        <Button variant="contained" color="primary" size="small" component={Link} to="/banking">
-          Back
-        </Button>
-      </form>
+            Save
+          </Button>
+          <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              you have sucessfully done
+            </Alert>
+          </Snackbar>
+          <Button variant="contained" color="primary" size="small" component={Link} to="/banking">
+            Back
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
@@ -108,7 +112,8 @@ ManageAccountPage.propTypes = {
   accountValue: PropTypes.shape({
     match: PropTypes.shape({
       params: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        aId: PropTypes.number.isRequired,
+        uId: PropTypes.number.isRequired,
       }),
     }),
   }).isRequired,

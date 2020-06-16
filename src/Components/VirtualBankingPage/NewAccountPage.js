@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { postAccount } from './VirtualBankingService';
 import './VirtualBankingPage.css';
+import ButtonAppBar from './Appbar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,32 +35,35 @@ function NewAccountPage(props) {
   };
 
   return (
-    <div className="vbFormPage">
-      <Typography variant="h5" gutterBottom>
-        Add New Account
-      </Typography>
-      <form className={classes.root} noValidate autoComplete="off">
-        <FormControl className="vbFormElement">
-          <InputLabel htmlFor="component-simple">User Id</InputLabel>
-          <Input id="component-simple" value={accountValue.match.params.id} disabled />
-        </FormControl>
-        <FormControl className="vbFormElement">
-          <InputLabel htmlFor="component-simple">Amount</InputLabel>
-          <Input id="component-simple" type="number" value={balance} onChange={balanceChange} />
-        </FormControl>
-        <Button
-          variant="outlined"
-          color="primary"
-          component={Link}
-          to="/banking"
-          onClick={() => addNewAccount(balance)}
-        >
-          Save
-        </Button>
-        <Button variant="contained" color="primary" size="small" component={Link} to="/banking">
-          Back
-        </Button>
-      </form>
+    <div>
+      <ButtonAppBar />
+      <div className="vbFormPage">
+        <Typography variant="h5" gutterBottom>
+          Add New Account
+        </Typography>
+        <form className={classes.root} noValidate autoComplete="off">
+          <FormControl className="vbFormElement">
+            <InputLabel htmlFor="component-simple">User Id</InputLabel>
+            <Input id="component-simple" value={accountValue.match.params.id} disabled />
+          </FormControl>
+          <FormControl className="vbFormElement">
+            <InputLabel htmlFor="component-simple">Amount</InputLabel>
+            <Input id="component-simple" type="number" value={balance} onChange={balanceChange} />
+          </FormControl>
+          <Button
+            variant="outlined"
+            color="primary"
+            component={Link}
+            to="/users"
+            onClick={() => addNewAccount(balance)}
+          >
+            Save
+          </Button>
+          <Button variant="contained" color="primary" size="small" component={Link} to="/users">
+            Back
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

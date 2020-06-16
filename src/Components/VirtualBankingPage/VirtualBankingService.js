@@ -13,8 +13,8 @@ const getAccount = () => {
       throw error;
     });
 };
-const getUsers = () => {
-  return API.get('/users', {
+const getAccountActivity = (id) => {
+  return API.get(`/accounts/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
@@ -26,8 +26,43 @@ const getUsers = () => {
       throw error;
     });
 };
+const getUserActivity = (id) => {
+  return API.get(`/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+const getUsers = () => {
+  return API.get(
+    localStorage.getItem('userId') !== '1000001'
+      ? `/users/${localStorage.getItem('userId')}`
+      : '/users',
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    },
+  )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 const postAccount = (account) => {
-  return API.post('/accounts', account)
+  return API.post('/accounts', account, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
     .then((response) => {
       return response.data;
     })
@@ -62,4 +97,13 @@ const postRegister = (registerData) => {
       alert(error);
     });
 };
-export { getAccount, postAccount, postManageAccount, postLogin, postRegister, getUsers };
+export {
+  getAccount,
+  postAccount,
+  postManageAccount,
+  postLogin,
+  postRegister,
+  getUsers,
+  getAccountActivity,
+  getUserActivity,
+};

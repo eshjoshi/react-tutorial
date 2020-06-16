@@ -13,3 +13,6 @@
     width: 30%;
     display: flex !important;
 }
+.userDetailsPadding{
+    padding-right: 2%;
+}

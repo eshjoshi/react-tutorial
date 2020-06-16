@@ -12,6 +12,9 @@ import ManageAccountPage from '../Components/VirtualBankingPage/ManageAccountPag
 import VirtualBankingLogin from '../Components/VirtualBankingPage/VirtualBankingLogin';
 import VirtualBankingNewRegister from '../Components/VirtualBankingPage/VirtualBankingNewRegister';
 import UsersAccountPage from '../Components/VirtualBankingPage/UsersAccountPage';
+import VirtualAccountActivity from '../Components/VirtualBankingPage/VirtualAccountActivity';
+import UserActivityPage from '../Components/VirtualBankingPage/UserActivityPage';
+import HigherOrderPage from '../Components/HigherOrderFunctionPage/HigherOrderPage';
 
 function RoutingPage() {
   return (
@@ -23,12 +26,15 @@ function RoutingPage() {
         <Route exact path="/stepper/:id" component={StepperPage} />
         <Route exact path="/calculator" component={CalculatorPage} />
         <Route exact path="/puzzale" component={PuzzaleGamePage} />
-        <Route exact path="/banking" component={VirtualBankingPage} />
+        <Route exact path="/userAccount/:id" component={VirtualBankingPage} />
         <Route exact path="/newAccount/:id" component={NewAccountPage} />
-        <Route exact path="/manageAccount/:id" component={ManageAccountPage} />
+        <Route exact path="/manageAccount/:uId/:aId" component={ManageAccountPage} />
         <Route exact path="/loginPage" component={VirtualBankingLogin} />
         <Route exact path="/createNewAccount" component={VirtualBankingNewRegister} />
         <Route exact path="/users" component={UsersAccountPage} />
+        <Route exact path="/accountActivity/:uId/:aId" component={VirtualAccountActivity} />
+        <Route exact path="/userActivity/:id" component={UserActivityPage} />
+        <Route exact path="/higherOrderFunction" component={HigherOrderPage} />
       </div>
     </BrowserRouter>
   );
