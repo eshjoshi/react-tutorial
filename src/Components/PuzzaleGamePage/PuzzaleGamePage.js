@@ -6,8 +6,17 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import Image from 'material-ui-image';
+import { connect } from 'react-redux';
 import ImagePage from './Image';
 import TilesData from './TilesData';
+import e from '../../Assets/elbow1.png';
+import t from '../../Assets/tee1.png';
+import o from '../../Assets/source1.png';
+import s from '../../Assets/straight1.png';
+import c from '../../Assets/cap1.png';
+import { store } from './CreateStore';
+import { addData } from './reducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,19 +34,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PuzzaleGamePage() {
+function PuzzaleGamePage(data) {
   const classes = useStyles();
-  const degree = [90, 180, 270, 0, 360];
-  const randomDegree = degree[Math.floor(Math.random() * degree.length)];
-  const [scramble, setScramble] = React.useState(randomDegree - 90);
-  const onClickScramble = () => {
-    setScramble(randomDegree);
-  };
-  const onClickHelp = () => {};
 
+  const [scramble, setScramble] = React.useState(0);
+  // const degree = [90, 180, 270, 0];
+  // const randomDegree = degree[Math.floor(Math.random() * degree.length)];
+
+  const onClickScramble = () => {
+    // const storeValue = ;
+    console.log(`--------------------${JSON.stringify(data)}`);
+    setScramble(scramble + 90);
+  };
+
+  const onClickHelp = () => {};
+  const table = [
+    [e, e, e, t, c],
+    [s, t, e, e, e],
+    [t, e, o, t, t],
+    [s, e, s, e, c],
+    [c, e, s, s, c],
+  ];
   return (
-    TilesData && (
+    table && (
       <div className="header">
+        <table>
+          {table.map((tile) => (
+            <tr>
+              {tile.map((x) => (
+                <th>
+                  <ImagePage
+                    src={x}
+                    alt={x}
+                    deg={scramble}
+                    setData={setScramble}
+                    style={{
+                      width: '100px',
+                      height: '100px',
+                      position: 'static',
+                    }}
+                  />
+                </th>
+              ))}
+            </tr>
+          ))}
+        </table>
+        {/* 
         <GridList cellHeight={160} className={classes.root} cols={5}>
           {TilesData.map((tile) => (
             <GridListTile
@@ -53,7 +95,7 @@ function PuzzaleGamePage() {
               <ImagePage src={tile.img} alt={tile.tittle} deg={scramble - tile.deg} />
             </GridListTile>
           ))}
-        </GridList>
+        </GridList> */}
         <Grid
           container
           direction="row"
@@ -61,12 +103,7 @@ function PuzzaleGamePage() {
           alignItems="center"
           className="buttonSpacing"
         >
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => onClickScramble()}
-          >
+          <Button variant="contained" color="primary" size="small" onClick={onClickScramble}>
             Scramble
           </Button>
           <Button variant="contained" color="primary" size="small" onClick={() => onClickHelp()}>
@@ -81,4 +118,14 @@ function PuzzaleGamePage() {
   );
 }
 
-export default PuzzaleGamePage;
+const mapStateToProps = (state) => ({
+  data: state,
+});
+
+const mapDispatchToProps = {
+  addData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PuzzaleGamePage);
+
+// export default PuzzaleGamePage;
