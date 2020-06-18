@@ -30,21 +30,21 @@ const tableHeaderName = [
     numeric: false,
     disablePadding: true,
     label: 'Amount',
-    align: 'left',
+    align: 'right',
   },
   {
     id: 'balance',
     numeric: true,
     disablePadding: true,
     label: 'Balance',
-    align: 'left',
+    align: 'right',
   },
   {
     id: 'operation',
     numeric: true,
     disablePadding: true,
     label: 'Operation',
-    align: 'left',
+    align: 'right',
   },
 ];
 
@@ -159,9 +159,9 @@ export default function VirtualAccountActivity(props) {
                           <TableCell align="left">
                             {moment(row.createdat).format('DD/MM/YYYY')}
                           </TableCell>
-                          <TableCell align="left">{`₹${row.amount / 100}`}</TableCell>
-                          <TableCell align="left">{`₹${row.balance / 100}`}</TableCell>
-                          <TableCell align="left">{row.operation}</TableCell>
+                          <TableCell align="right">{`₹${row.amount / 100}`}</TableCell>
+                          <TableCell align="right">{`₹${row.balance / 100}`}</TableCell>
+                          <TableCell align="right">{row.operation}</TableCell>
                         </TableRow>
                       );
                     })}

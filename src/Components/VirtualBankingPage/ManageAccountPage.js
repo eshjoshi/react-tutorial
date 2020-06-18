@@ -100,7 +100,13 @@ function ManageAccountPage(props) {
               you have sucessfully done
             </Alert>
           </Snackbar>
-          <Button variant="contained" color="primary" size="small" component={Link} to="/banking">
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            component={Link}
+            to={`/userAccount/${accountValue.match.params.uId}`}
+          >
             Back
           </Button>
         </form>

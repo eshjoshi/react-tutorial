@@ -37,14 +37,14 @@ const tableHeaderName = [
     numeric: false,
     disablePadding: true,
     label: 'Amount',
-    align: 'left',
+    align: 'right',
   },
   {
     id: 'action',
     numeric: false,
     disablePadding: true,
     label: 'Action',
-    align: 'left',
+    align: 'center',
   },
 ];
 
@@ -135,9 +135,13 @@ export default function UsersAccountPage(props) {
             </Typography>
           </Grid>
           <Grid container direction="row" justify="flex-end" alignItems="flex-start">
-            <Button variant="contained" color="primary" size="small" component={Link} to="/users">
-              Back
-            </Button>
+            {localStorage.getItem('userId') === '1000001' ? (
+              <Button variant="contained" color="primary" size="small" component={Link} to="/users">
+                Back
+              </Button>
+            ) : (
+              ''
+            )}
           </Grid>
           <Paper className={classes.paper}>
             <TableContainer>
@@ -166,15 +170,19 @@ export default function UsersAccountPage(props) {
                           <TableCell align="left">
                             {moment(row.createdat).format('DD/MM/YYYY')}
                           </TableCell>
-                          <TableCell align="left">{`₹${row.balance / 100}`}</TableCell>
-                          <TableCell align="left">
+                          <TableCell align="right">{`₹${row.balance / 100}`}</TableCell>
+                          <TableCell align="center">
                             <Link to={`/accountActivity/${users.userid}/${row.id}`}>
                               View Activity
                             </Link>
                             <br />
-                            <Link to={`/manageAccount/${users.userid}/${row.id}`}>
-                              Manage Account
-                            </Link>
+                            {localStorage.getItem('userId') !== '1000001' ? (
+                              <Link to={`/manageAccount/${users.userid}/${row.id}`}>
+                                Manage Account
+                              </Link>
+                            ) : (
+                              ''
+                            )}
                           </TableCell>
                         </TableRow>
                       );

@@ -20,7 +20,7 @@ const tableHeaderName = [
     numeric: true,
     disablePadding: true,
     label: 'Id',
-    align: 'center',
+    align: 'left',
   },
   {
     id: 'fullname',
@@ -48,7 +48,7 @@ const tableHeaderName = [
     numeric: true,
     disablePadding: true,
     label: 'Number of Account',
-    align: 'left',
+    align: 'center',
   },
   {
     id: 'action',
@@ -161,7 +161,7 @@ export default function UsersAccountPage() {
                           <TableCell align="left">
                             {moment(row.createdat).format('DD/MM/YYYY')}
                           </TableCell>
-                          <TableCell align="left">{row.numaccounts}</TableCell>
+                          <TableCell align="center">{row.numaccounts}</TableCell>
                           <TableCell align="left">
                             <Link to={`/newAccount/${row.id}`}>Create Account</Link>
                             <br />

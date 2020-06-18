@@ -55,7 +55,7 @@ export const EnhancedTableHead = (props) => {
             align={headCell.align}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
-            style={{ padding: '14px 40px 14px 0px' }}
+            style={{ padding: '10px' }}
           >
             {/* {t(headCell.label)} */}
             <TableSortLabel
