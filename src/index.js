@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
-import reducer from './Components/PuzzaleGamePage/reducer';
+import rootReducer from './Reducers/rootReducer';
 
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <React.StrictMode>

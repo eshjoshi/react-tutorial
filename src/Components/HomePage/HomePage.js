@@ -154,6 +154,30 @@ function HomePage() {
           </CardActions>
         </Card>
       </Grid>
+      <Grid item xs={4} className={classes.spacing}>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="https://eloquentjavascript.net/img/chapter_picture_5.jpg"
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Redux
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Redux Poc
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              <Link to="/higherOrderFunction">Show</Link>
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
     </Grid>
   );
 }

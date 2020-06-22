@@ -15,6 +15,7 @@ import UsersAccountPage from '../Components/VirtualBankingPage/UsersAccountPage'
 import VirtualAccountActivity from '../Components/VirtualBankingPage/VirtualAccountActivity';
 import UserActivityPage from '../Components/VirtualBankingPage/UserActivityPage';
 import HigherOrderPage from '../Components/HigherOrderFunctionPage/HigherOrderPage';
+import ReduxPocPage from '../Components/Redux/ReduxPocPage';
 
 function RoutingPage() {
   return (
@@ -35,6 +36,7 @@ function RoutingPage() {
         <Route exact path="/accountActivity/:uId/:aId" component={VirtualAccountActivity} />
         <Route exact path="/userActivity/:id" component={UserActivityPage} />
         <Route exact path="/higherOrderFunction" component={HigherOrderPage} />
+        <Route exact path="/reduxPoc" component={ReduxPocPage} />
       </div>
     </BrowserRouter>
   );
